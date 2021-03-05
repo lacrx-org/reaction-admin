@@ -29,7 +29,7 @@
     ], 
     "containerDefinitions": [
         {
-            "memoryReservation": 1024, 
+            "memoryReservation": 512, 
             "environment": [
                 {
                     "name": "PUBLIC_GRAPHQL_API_URL_HTTP", 
