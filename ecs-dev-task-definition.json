@@ -71,6 +71,16 @@
                     "name": "OAUTH2_PUBLIC_URL", 
                     "value": "https://auth-test.lacrx.com"
                 }
+            ],
+            "secrets": [
+                {
+                    "name": "MONGO_URL",
+                    "valueFrom": "arn:aws:secretsmanager:us-west-2:662460439248:secret:test/MONGO_URL-ksuGt3"
+                },
+                {
+                    "name": "MONGO_OPLOG_URL",
+                    "valueFrom": "arn:aws:secretsmanager:us-west-2:662460439248:secret:test/MONGO_OPLOG_URL-d6JCSB"
+                }
             ], 
             "name": "test-reaction-admin", 
             "workingDirectory": "/usr/local/src/app", 

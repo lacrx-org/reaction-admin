@@ -30,7 +30,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: lamps-backend
+          ECR_REPOSITORY: lamps-admin
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build --build-arg NEXTJS_DOTENV=development -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
