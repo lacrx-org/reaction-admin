@@ -1,74 +1,74 @@
 {
-    "status": "ACTIVE", 
-    "family": "test-reaction-admin", 
+    "status": "ACTIVE",
+    "family": "test-reaction-admin",
     "placementConstraints": [],
-    "executionRoleArn": "arn:aws:iam::662460439248:role/ecsTaskExecutionRole", 
+    "executionRoleArn": "arn:aws:iam::662460439248:role/ecsTaskExecutionRole",
     "requiresAttributes": [
         {
             "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-        }, 
+        },
         {
             "name": "com.amazonaws.ecs.capability.ecr-auth"
-        }, 
+        },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-        }, 
+        },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
-        }, 
+        },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
         }
-    ], 
+    ],
     "compatibilities": [
         "EC2"
-    ], 
-    "volumes": [], 
+    ],
+    "volumes": [],
     "requiresCompatibilities": [
         "EC2"
-    ], 
+    ],
     "containerDefinitions": [
         {
-            "memoryReservation": 512, 
+            "memoryReservation": 512,
             "environment": [
                 {
-                    "name": "PUBLIC_GRAPHQL_API_URL_HTTP", 
+                    "name": "PUBLIC_GRAPHQL_API_URL_HTTP",
                     "value": "https://api-test.lacrx.com/graphql"
-                }, 
+                },
                 {
-                    "name": "PORT", 
+                    "name": "PORT",
                     "value": "4080"
-                }, 
+                },
                 {
-                    "name": "PUBLIC_GRAPHQL_API_URL_WS", 
+                    "name": "PUBLIC_GRAPHQL_API_URL_WS",
                     "value": "wss://api-test.lacrx.com/graphql"
-                }, 
+                },
                 {
-                    "name": "ROOT_URL", 
+                    "name": "ROOT_URL",
                     "value": "https://admin-test.lacrx.com"
-                }, 
+                },
                 {
-                    "name": "OAUTH2_IDP_PUBLIC_CHANGE_PASSWORD_URL", 
+                    "name": "OAUTH2_IDP_PUBLIC_CHANGE_PASSWORD_URL",
                     "value": "https://identity-test.lacrx.com/account/change-password?email=EMAIL&from=FROM"
-                }, 
+                },
                 {
-                    "name": "PUBLIC_I18N_BASE_URL", 
+                    "name": "PUBLIC_I18N_BASE_URL",
                     "value": "https://api-test.lacrx.com"
-                }, 
+                },
                 {
-                    "name": "PUBLIC_FILES_BASE_URL", 
+                    "name": "PUBLIC_FILES_BASE_URL",
                     "value": "https://api-test.lacrx.com"
-                }, 
+                },
                 {
-                    "name": "PUBLIC_STOREFRONT_HOME_URL", 
+                    "name": "PUBLIC_STOREFRONT_HOME_URL",
                     "value": "https://dev-test.lacrx.com"
-                }, 
+                },
                 {
-                    "name": "OAUTH2_ADMIN_URL", 
+                    "name": "OAUTH2_ADMIN_URL",
                     "value": "http://internal-test-hydra-admin-lb-1150266455.us-west-2.elb.amazonaws.com:4445"
-                }, 
+                },
                 {
-                    "name": "OAUTH2_PUBLIC_URL", 
+                    "name": "OAUTH2_PUBLIC_URL",
                     "value": "https://auth-test.lacrx.com"
                 }
             ],
@@ -81,34 +81,34 @@
                     "name": "MONGO_OPLOG_URL",
                     "valueFrom": "arn:aws:secretsmanager:us-west-2:662460439248:secret:test/MONGO_OPLOG_URL-d6JCSB"
                 }
-            ], 
-            "name": "test-reaction-admin", 
-            "workingDirectory": "/usr/local/src/app", 
-            "mountPoints": [], 
-            "image": "662460439248.dkr.ecr.us-west-2.amazonaws.com/lamps-admin:trunk", 
+            ],
+            "name": "test-reaction-admin",
+            "workingDirectory": "/usr/local/src/app",
+            "mountPoints": [],
+            "image": "662460439248.dkr.ecr.us-west-2.amazonaws.com/lamps-admin:trunk",
             "logConfiguration": {
-                "logDriver": "awslogs", 
+                "logDriver": "awslogs",
                 "options": {
-                    "awslogs-region": "us-west-2", 
-                    "awslogs-stream-prefix": "ecs", 
+                    "awslogs-region": "us-west-2",
+                    "awslogs-stream-prefix": "ecs",
                     "awslogs-group": "/ecs/test-reaction-admin"
                 }
-            }, 
-            "cpu": 0, 
+            },
+            "cpu": 0,
             "portMappings": [
                 {
-                    "protocol": "tcp", 
-                    "containerPort": 4080, 
+                    "protocol": "tcp",
+                    "containerPort": 4080,
                     "hostPort": 0
                 }
-            ], 
+            ],
             "command": [
-                "node", 
+                "node",
                 "main.js"
-            ], 
-            "essential": true, 
+            ],
+            "essential": true,
             "volumesFrom": []
         }
-    ], 
+    ],
     "revision": 1
 }

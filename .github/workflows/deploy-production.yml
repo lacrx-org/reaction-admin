@@ -1,19 +1,19 @@
-name: Deploy Admin to Test
+name: Deploy Admin to Production
 
 on:
   push:
     branches:
-      - dev
+      - trunk
 
 jobs:
   ecs-deploy:
     name: Deploy to ECS
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout dev branch
+      - name: Checkout trunk branch
         uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: trunk
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -30,7 +30,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: lamps-admin
+          ECR_REPOSITORY: llumin-admin
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build --build-arg NEXTJS_DOTENV=development -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
@@ -41,15 +41,15 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ecs-dev-task-definition.json
-          container-name: test-reaction-admin
+          task-definition: ecs-prod-task-definition.json
+          container-name: production-reaction-admin
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: test-reaction-admin
-          cluster: test
+          service: production-reaction-admin
+          cluster: production
           wait-for-service-stability: true
 

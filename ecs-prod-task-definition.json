@@ -1,0 +1,103 @@
+{
+  "status": "ACTIVE",
+  "family": "production-reaction-admin",
+  "placementConstraints": [],
+  "executionRoleArn": "arn:aws:iam::662460439248:role/ecsTaskExecutionRole",
+  "taskDefinitionArn": "arn:aws:ecs:us-west-2:662460439248:task-definition/production-reaction-admin:1",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    }
+  ],
+  "compatibilities": [
+    "EC2"
+  ],
+  "volumes": [],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "containerDefinitions": [
+    {
+      "memoryReservation": 512,
+      "environment": [
+        {
+          "name": "PUBLIC_GRAPHQL_API_URL_HTTP",
+          "value": "https://api.llum.in/graphql"
+        },
+        {
+          "name": "PORT",
+          "value": "4080"
+        },
+        {
+          "name": "PUBLIC_GRAPHQL_API_URL_WS",
+          "value": "wss://api.llum.in/graphql"
+        },
+        {
+          "name": "ROOT_URL",
+          "value": "https://admin.llum.in"
+        },
+        {
+          "name": "PUBLIC_I18N_BASE_URL",
+          "value": "https://api.llum.in"
+        },
+        {
+          "name": "PUBLIC_FILES_BASE_URL",
+          "value": "https://api.llum.in"
+        },
+        {
+          "name": "PUBLIC_STOREFRONT_HOME_URL",
+          "value": "https://llum.in"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "MONGO_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-west-2:662460439248:secret:production/MONGO_URL-u0ZXKM"
+        },
+        {
+          "name": "MONGO_OPLOG_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-west-2:662460439248:secret:production/MONGODB_OPLOG_URL-xxmlua"
+        }
+      ],
+      "name": "production-reaction-admin",
+      "workingDirectory": "/usr/local/src/app",
+      "mountPoints": [],
+      "image": "662460439248.dkr.ecr.us-west-2.amazonaws.com/llumin-admin:trunk",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "us-west-2",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-group": "/ecs/product-reaction-admin"
+        }
+      },
+      "cpu": 0,
+      "portMappings": [
+        {
+          "protocol": "tcp",
+          "containerPort": 4080,
+          "hostPort": 0
+        }
+      ],
+      "command": [
+        "node",
+        "main.js"
+      ],
+      "essential": true,
+      "volumesFrom": []
+    }
+  ],
+  "revision": 1
+}
