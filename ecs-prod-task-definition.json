@@ -80,7 +80,7 @@
         "options": {
           "awslogs-region": "us-west-2",
           "awslogs-stream-prefix": "ecs",
-          "awslogs-group": "/ecs/product-reaction-admin"
+          "awslogs-group": "/ecs/production-reaction-admin"
         }
       },
       "cpu": 0,
